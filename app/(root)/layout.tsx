@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface SetupLayoutProp{
+export interface SetupLayoutProp{
     children: React.ReactNode
 }
 

@@ -1,11 +1,29 @@
-import React from 'react'
+"use client";
 
-const setupPage = () => {
+// import { UserButton } from "@clerk/nextjs";
+import React, { useState } from "react";
+import { Modal } from "@/components/modal";
+
+const SetupPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
-      this is a dashboard
-    </div>
-  )
-}
+      <Modal
+        title="Create Your Store"
+        description=""
+        isOpen={isModalOpen}
+        onClose={handleClose}
+      > 
 
-export default setupPage
+      hello
+      </Modal>
+    </div>
+  );
+};
+
+export default SetupPage;

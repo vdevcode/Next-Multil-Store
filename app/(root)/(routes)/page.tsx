@@ -1,23 +1,18 @@
 "use client";
 
 // import { UserButton } from "@clerk/nextjs";
-import React, { useState } from "react";
+import React from "react";
 import { Modal } from "@/components/modal";
 
 const SetupPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div>
+      store modal
       <Modal
         title="Create Your Store"
         description=""
-        isOpen={isModalOpen}
-        onClose={handleClose}
+        isOpen
+        onClose={() => {}}
       > 
 
       hello

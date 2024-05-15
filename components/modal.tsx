@@ -1,14 +1,11 @@
 "use client";
-
 import {
+  DialogHeader,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-  DialogOverlay,
-  DialogClose,
-} from "@radix-ui/react-dialog";
-import { DialogHeader } from "./ui/dialog";
+} from "./ui/dialog";
 
 interface ModalProps {
   title: string;
@@ -26,17 +23,13 @@ export const Modal = ({
   children,
 }: ModalProps) => {
   return (
-    <Dialog open={isOpen} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogOverlay />
+    <Dialog open={isOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div>{children}</div>
-        <DialogClose asChild>
-          <button onClick={onClose}>Close</button>
-        </DialogClose>
       </DialogContent>
     </Dialog>
   );

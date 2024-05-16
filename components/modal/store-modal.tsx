@@ -72,7 +72,7 @@ export const StoreModal = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is your store's public name.
+                    This is your  public name.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

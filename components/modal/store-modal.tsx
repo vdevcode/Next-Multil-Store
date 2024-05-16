@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Should be minimum 3 characters" }),
@@ -38,9 +38,11 @@ export const StoreModal = () => {
     try {
       setIsLoading(true);
       const response = await axios.post("/api/stores", values);
+      toast.success("Store created success!!!");
       console.log(response);
     } catch (error) {
       console.error(error);
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }

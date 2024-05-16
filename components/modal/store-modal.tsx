@@ -17,7 +17,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-// Định nghĩa schema cho form sử dụng Zod
 const formSchema = z.object({
   name: z.string().min(3, { message: "Should be minimum 3 characters" }),
 });
@@ -71,16 +70,17 @@ export const StoreModal = () => {
                       disabled={isLoading}
                     />
                   </FormControl>
-                  <FormDescription>
-                    This is your  public name.
-                  </FormDescription>
+                  <FormDescription>This is your public name.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Submitting..." : "Submit"}
-            </Button>
+            <div className="flex items-center justify-end gap-[10px]">
+              <Button type="button" variant={"outline"}>Cancel</Button>
+              <Button type="submit" disabled={isLoading} size={"sm"}>
+                {isLoading ? "Submitting..." : "Submit"}
+              </Button>
+            </div>
           </form>
         </FormProvider>
       </div>

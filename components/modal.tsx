@@ -22,8 +22,14 @@ export const Modal = ({
   onClose,
   children,
 }: ModalProps) => {
+  const onChange = (open: boolean) => {
+    if (!open) {
+      onClose();
+    }
+  };
+
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

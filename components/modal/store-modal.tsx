@@ -16,6 +16,8 @@ import {
 } from "../ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+
 
 const formSchema = z.object({
   name: z.string().min(3, { message: "Should be minimum 3 characters" }),
@@ -33,10 +35,10 @@ export const StoreModal = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsLoading(true);
     try {
-      console.log(values);
-      storeModal.onClose();
+      setIsLoading(true);
+      const response = await axios.post("/api/stores", values);
+      console.log(response);
     } catch (error) {
       console.error(error);
     } finally {
@@ -76,7 +78,9 @@ export const StoreModal = () => {
               )}
             />
             <div className="flex items-center justify-end gap-[10px]">
-              <Button type="button" variant={"outline"}>Cancel</Button>
+              <Button type="button" variant={"outline"}>
+                Cancel
+              </Button>
               <Button type="submit" disabled={isLoading} size={"sm"}>
                 {isLoading ? "Submitting..." : "Submit"}
               </Button>

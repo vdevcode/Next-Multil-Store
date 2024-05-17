@@ -16,6 +16,8 @@ import {
 import { Check, ChevronsUpDown, StoreIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { StoreListItem } from "./store-list-item";
+import { CreateStoreItem } from "./create-store-item";
+import { useStoreModal } from "@/hooks/use-store-modal";
 
 type PopoverTriggerPops = React.ComponentPropsWithoutRef<typeof PopoverTrigger>;
 
@@ -40,6 +42,8 @@ export const StoreSwitcher = ({ items }: StoreSwitcherProps) => {
   const [filtered, setFiltered] = useState<{ label: string; value: string }[]>(
     []
   );
+
+  const storeModal = useStoreModal();
 
   const onStoreSelect = (store: { value: string; label: string }) => {
     setOpen(false);
@@ -88,26 +92,38 @@ export const StoreSwitcher = ({ items }: StoreSwitcherProps) => {
               />
             </div>
             <CommandList>
-            <CommandGroup heading="stores">
-                {searchTerm === ""
-                  ? formatedStore?.map((item) => (
-                      <StoreListItem
-                        store={item}
-                        key={item.value}
-                        onSelect={onStoreSelect}
-                        isChecked={currentStore?.value === item.value}
-                      />
-                    ))
-                  : filtered?.length === 0
-                  ? filtered?.map((item) => (
-                      <StoreListItem
-                        store={item}
-                        key={item.value}
-                        onSelect={onStoreSelect}
-                        isChecked={currentStore?.value === item.value}
-                      />
-                    ))
-                  : <CommandEmpty>No Store found.</CommandEmpty>}
+              <CommandGroup heading="stores">
+                {searchTerm === "" ? (
+                  formatedStore?.map((item) => (
+                    <StoreListItem
+                      store={item}
+                      key={item.value}
+                      onSelect={onStoreSelect}
+                      isChecked={currentStore?.value === item.value}
+                    />
+                  ))
+                ) : filtered?.length === 0 ? (
+                  filtered?.map((item) => (
+                    <StoreListItem
+                      store={item}
+                      key={item.value}
+                      onSelect={onStoreSelect}
+                      isChecked={currentStore?.value === item.value}
+                    />
+                  ))
+                ) : (
+                  <CommandEmpty>No Store found.</CommandEmpty>
+                )}
+              </CommandGroup>
+            </CommandList>
+            <CommandList>
+              <CommandGroup>
+                <CreateStoreItem
+                  onClick={() => {
+                    setOpen(false);
+                    storeModal.onOpen();
+                  }}
+                />
               </CommandGroup>
             </CommandList>
           </Command>

@@ -25,12 +25,12 @@ export const StoreSwitcher = ({ items }: StoreSwitcherProps) => {
   const params = useParams();
   const router = useRouter();
 
-  const formatedStore = items.map((item) => ({
+  const formatedStore = items?.map((item) => ({
     label: item.name,
     value: item.id,
   }));
 
-  const currentStore = formatedStore.find(
+  const currentStore = formatedStore?.find(
     (item) => item.value === params.storeId
   );
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ export const StoreSwitcher = ({ items }: StoreSwitcherProps) => {
             <CommandInput placeholder="Search framework..." />
             <CommandEmpty>No Store found.</CommandEmpty>
             <CommandGroup>
-              {formatedStore.map((store) => (
+              {formatedStore?.map((store) => (
                 <CommandItem
                   key={store.value}
                   value={store.value}

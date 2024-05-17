@@ -16,7 +16,6 @@ const SettingPage = async ({ params }: SettingPageProps) => {
   if (!userId) {
     redirect("/sign-in");
   }
-
   const store = (
     await getDoc(doc(db, "stores", params.storeId))
   ).data() as Store;

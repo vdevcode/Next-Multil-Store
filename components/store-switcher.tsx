@@ -92,7 +92,7 @@ export const StoreSwitcher = ({ items }: StoreSwitcherProps) => {
               />
             </div>
             <CommandList>
-              <CommandGroup heading="stores">
+              <CommandGroup heading="Stores" >
                 {searchTerm === "" ? (
                   formatedStore?.map((item) => (
                     <StoreListItem

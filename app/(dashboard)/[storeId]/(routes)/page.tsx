@@ -7,9 +7,9 @@ interface DashboardOverviewProps {
 }
 
 const DashboardOverview = async ({ params }: DashboardOverviewProps) => {
-  const store = (await (
+  const store = (
     await getDoc(doc(db, "stores", params.storeId))
-  ).data()) as Store;
+  ).data() as Store;
 
   return <div className="">overview {store.name}</div>;
 };

@@ -48,12 +48,14 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
       const response = await axios.patch(`/api/stores/${params.storeId}`, data);
       toast.success("Store update success!!!");
       window.location.assign(`/${response.data.id}`);
+      router.refresh();
       console.log(response);
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong");
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data || "Something went wrong";
+      toast.error(errorMessage);
     } finally {
-      setIsLoading(false);  
+      setIsLoading(false);
     }
   };
 
@@ -65,7 +67,7 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
           <Trash className="h-4 w-4" />
         </Button>
       </div>
-      <Separator />
+      <Separator className="my-4" />
 
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

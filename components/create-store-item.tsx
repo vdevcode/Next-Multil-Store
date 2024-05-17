@@ -11,7 +11,7 @@ export const CreateStoreItem = ({ onClick }: CreateStoreItemProps) => {
       onClick={onClick}
     >
       <PlusCircle className="h-4 w-4 mr-2" />
-      Create Store
+      <p>Create Store</p>
     </div>
   );
 };

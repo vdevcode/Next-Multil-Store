@@ -58,7 +58,7 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
   };
 
   return (
-    <>
+    <div>
       <div className="flex items-center justify-start">
         <Heading title="Setting" description="Manager store for performances" />
         <Button variant={"destructive"} size={"icon"}>
@@ -95,6 +95,6 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
           </div>
         </form>
       </FormProvider>
-    </>
+    </div>
   );
 };

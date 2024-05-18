@@ -34,7 +34,7 @@ export const PATCH = async (
       return new NextResponse("Store name is missing", { status: 400 });
     }
 
-    const docRef = doc(db, params.storeId);
+    const docRef = doc(db, "stores", params.storeId);
     await updateDoc(docRef, { name });
 
     const store = (await getDoc(docRef)).data() as Store;
@@ -53,8 +53,6 @@ export const DELETE = async (
 ) => {
   try {
     const { userId } = auth();
-    const body = await req.json();
-
     if (!userId) {
       return new NextResponse("Un-authorize", { status: 400 });
     }
@@ -63,15 +61,10 @@ export const DELETE = async (
       return new NextResponse("Store name is required", { status: 400 });
     }
 
-    const { name } = body;
-    if (!name) {
-      return new NextResponse("Store name is missing", { status: 400 });
-    }
-
-    const docRef = doc(db, params.storeId);
+    const docRef = doc(db, "stores", params.storeId);
     await deleteDoc(docRef);
 
-    return NextResponse.json({ msg: "delete success" });
+    return NextResponse.json({ msg: "store and all in sub-collections" });
   } catch (error) {
     console.log(`Stored patch: ${error}`);
     return new NextResponse("server error", { status: 500 });

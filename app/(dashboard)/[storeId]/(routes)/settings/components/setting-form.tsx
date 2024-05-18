@@ -22,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AlertModal } from "@/components/modal/alert-modal";
+import { ApiAlert } from "@/components/api-alert";
+import {useOrigin} from "@/hooks/use-origin";
 
 interface SettingFormProps {
   initialData: Store;
@@ -42,6 +44,7 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin()
   const [open, setIsOpen] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -122,6 +125,9 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
           </div>
         </form>
       </FormProvider>
+
+      <Separator className="my-4" />
+      <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${params.storeId}`} variant="public"/>
     </div>
   );
 };

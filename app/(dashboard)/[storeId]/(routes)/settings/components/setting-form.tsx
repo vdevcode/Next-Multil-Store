@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AlertModal } from "@/components/modal/alert-modal";
 
 interface SettingFormProps {
   initialData: Store;
@@ -41,6 +42,7 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
+  const [open, setIsOpen] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
@@ -49,9 +51,24 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
       toast.success("Store update success!!!");
       router.refresh();
     } catch (error: any) {
-      const errorMessage =
-        error.response?.data || "Something went wrong";
+      const errorMessage = error.response?.data || "Something went wrong";
       toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.delete(`/api/stores/${params.storeId}`);
+      toast.success("Store delete success!!!");
+      router.refresh();
+      router.push("/");
+    } catch (error: any) {
+      const errorMessage = error.response?.data || "Something went wrong";
+      toast.error(errorMessage);
+      setIsOpen(false);
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +76,19 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
 
   return (
     <div>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setIsOpen(false)}
+        onConfirm={onDelete}
+        loading={isLoading}
+      />
       <div className="flex items-center justify-start">
         <Heading title="Setting" description="Manager store for performances" />
-        <Button variant={"destructive"} size={"icon"}>
+        <Button
+          variant={"destructive"}
+          size={"icon"}
+          onClick={() => setIsOpen(true)}
+        >
           <Trash className="h-4 w-4" />
         </Button>
       </div>

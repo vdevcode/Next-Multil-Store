@@ -47,9 +47,7 @@ export const SettingForm = ({ initialData }: SettingFormProps) => {
       setIsLoading(true);
       const response = await axios.patch(`/api/stores/${params.storeId}`, data);
       toast.success("Store update success!!!");
-      window.location.assign(`/${response.data.id}`);
       router.refresh();
-      console.log(response);
     } catch (error: any) {
       const errorMessage =
         error.response?.data || "Something went wrong";

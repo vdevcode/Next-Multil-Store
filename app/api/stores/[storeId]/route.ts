@@ -34,7 +34,7 @@ export const PATCH = async (
       return new NextResponse("Store name is missing", { status: 400 });
     }
 
-    const docRef = doc(db, params.storeId);
+    const docRef = doc(db, "stores", params.storeId);
     await updateDoc(docRef, { name });
 
     const store = (await getDoc(docRef)).data() as Store;
@@ -68,7 +68,7 @@ export const DELETE = async (
       return new NextResponse("Store name is missing", { status: 400 });
     }
 
-    const docRef = doc(db, params.storeId);
+    const docRef = doc(db, "stores", params.storeId);
     await deleteDoc(docRef);
 
     return NextResponse.json({ msg: "delete success" });

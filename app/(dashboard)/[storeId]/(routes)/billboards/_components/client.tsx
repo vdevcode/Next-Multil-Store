@@ -6,18 +6,17 @@ import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 export const BillBoardClient = () => {
-  const params = useParams();
   const router = useRouter();
-
+  const params = useParams();
   return (
     <div className="flex items-center justify-between">
       <Heading
         title={`Billboards (0)`}
-        description="Manager billboards for store "
+        description="Manager billboards for your store"
       />
-      <Button onClick={() => router.push(`/${params.storeId}/billboards`)}>
-        <Plus className="" />
-        Add New
+      <Button className="" onClick={() => router.push(`/${params.storeId}/billboards/create`)}>
+        <Plus className="h-4 w-4 mr-2" />
+        New Store
       </Button>
     </div>
   );

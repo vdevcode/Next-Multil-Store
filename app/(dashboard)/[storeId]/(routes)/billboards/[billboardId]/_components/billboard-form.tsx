@@ -50,9 +50,13 @@ export const BillboardForm = ({ initialData }: BillboardFormPops) => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const response = await axios.patch(`/api/stores/${params.storeId}`, data);
-      toast.success("Store update success!!!");
+      if (initialData) {
+      } else {
+        await axios.post(`/api/${params.storeId}/billboards`, data);
+      }
+      toast.success("Billboards updated successfully");
       router.refresh();
+      router.push(`/${params.storeId}/billboards`);
     } catch (error: any) {
       const errorMessage = error.response?.data || "Something went wrong";
       toast.error(errorMessage);
@@ -64,7 +68,7 @@ export const BillboardForm = ({ initialData }: BillboardFormPops) => {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.delete(`/api/stores/${params.storeId}`);
+      const response = await axios.delete(`/api/${params.storeId}`);
       toast.success("Store delete success!!!");
       router.refresh();
       router.push("/");

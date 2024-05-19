@@ -1,14 +1,13 @@
-import React from 'react'
-import { BillBoardClient } from './components/client'
+import { BillBoardClient } from "./_components/client"
 
-const BillBoards = () => {
-  return (
-    <div className='flex-col'>
-        <div className="flex-1 space-x-4 pt-6 p-8">
-            <BillBoardClient />
+const BillBoards = ({params}: {params: {storeId: string }}) => {
+    return (
+        <div className="flex-col">
+            <div className="flex-1 space-x-4 p-8 pt-6">
+                <BillBoardClient />
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default BillBoards

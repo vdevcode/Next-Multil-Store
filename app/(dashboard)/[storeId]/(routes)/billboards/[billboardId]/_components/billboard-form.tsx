@@ -107,8 +107,8 @@ export const BillboardForm = ({ initialData }: BillboardFormPops) => {
                     <ImageUpload
                       value={field.value ? [field.value] : []}
                       disabled={isLoading}
-                      onChange={() => {}}
-                      onRemove={() => {}}
+                      onChange={(url) => field.onChange(url)}
+                      onRemove={() => field.onChange("")}
                     />
                   </FormControl>
                 </FormItem>

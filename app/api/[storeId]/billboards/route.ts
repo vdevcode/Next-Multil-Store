@@ -92,8 +92,7 @@ export const GET = async (
       await getDocs(collection(doc(db, "stores", params.storeId), "billboards"))
     ).docs.map((doc) => doc.data() as BillBoards[]);
 
-
-    return NextResponse.json({billboardsData})
+    return NextResponse.json({ billboardsData });
   } catch (error) {
     console.log(`Stored post: ${error}`);
     return new NextResponse("server error", { status: 500 });

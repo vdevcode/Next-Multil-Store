@@ -1,3 +1,4 @@
+
 import { collection, doc, getDocs } from "firebase/firestore";
 import { BillBoardClient } from "./_components/client";
 import { db } from "@/lib/firebase";

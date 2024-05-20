@@ -2,6 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { CellImage } from "./cell-image"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export interface BillboardColumns{
   id: string
@@ -21,10 +23,30 @@ export const columns: ColumnDef<BillboardColumns>[] = [
   },
   {
     accessorKey: "label",
-    header: "Billboard Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Label
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "createAt",
-    header: "Date",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
 ]

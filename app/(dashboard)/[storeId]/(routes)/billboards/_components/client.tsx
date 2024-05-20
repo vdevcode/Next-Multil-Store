@@ -28,7 +28,7 @@ export const BillBoardClient = ({data}: BillBoardClientPops) => {
       </Button>
     </div>
     <Separator className="my-4" />
-      <DataTable data={data} columns={columns} />
+      <DataTable searchKey="label" data={data} columns={columns} />
    </div>
   );
 };

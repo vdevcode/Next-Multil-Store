@@ -24,9 +24,13 @@ export const PATCH = async (
         !imageUrl && "imageUrl",
         !params.storeId && "storeId",
         !params.billboardId && "billboardId",
-      ].filter(Boolean).join(", ");
+      ]
+        .filter(Boolean)
+        .join(", ");
 
-      return new NextResponse(`Missing required fields: ${missingFields}`, { status: 400 });
+      return new NextResponse(`Missing required fields: ${missingFields}`, {
+        status: 400,
+      });
     }
 
     const storeRef = doc(db, "stores", params.storeId);
@@ -41,7 +45,13 @@ export const PATCH = async (
       return new NextResponse("Unauthorized access", { status: 403 });
     }
 
-    const billboardRef = doc(db, "stores", params.storeId, "billboards", params.billboardId);
+    const billboardRef = doc(
+      db,
+      "stores",
+      params.storeId,
+      "billboards",
+      params.billboardId
+    );
     const billboardDoc = await getDoc(billboardRef);
 
     if (!billboardDoc.exists()) {
@@ -58,7 +68,6 @@ export const PATCH = async (
     return new NextResponse("Server error", { status: 500 });
   }
 };
-
 
 export const DELETE = async (
   req: Request,
@@ -107,13 +116,8 @@ export const DELETE = async (
     );
 
     await deleteDoc(billboardRef);
-    const billboard = (
-      await getDoc(
-        doc(db, "store", params.storeId, "billboards", params.billboardId)
-      )
-    ).data() as BillBoards;
 
-    return NextResponse.json({ billboard });
+    return NextResponse.json({ msg: "Delete success " });
   } catch (error) {
     console.log(`Stored patch: ${error}`);
     return new NextResponse("server error", { status: 500 });

@@ -2,8 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { CellImage } from "./cell-image"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CellAction } from "./cell-action"
 
 export interface BillboardColumns{
   id: string
@@ -49,4 +50,8 @@ export const columns: ColumnDef<BillboardColumns>[] = [
       )
     },
   },
+  {
+    id: "action",
+    cell: ({row}) => <CellAction data={row.original} />
+  }
 ]

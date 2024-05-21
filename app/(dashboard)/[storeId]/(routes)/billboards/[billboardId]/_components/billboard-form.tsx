@@ -67,6 +67,7 @@ export const BillboardForm = ({ initialData }: BillboardFormPops) => {
       const errorMessage = error.response?.data || "Something went wrong";
       toast.error(errorMessage);
     } finally {
+      router.refresh();
       setIsLoading(false);
     }
   };

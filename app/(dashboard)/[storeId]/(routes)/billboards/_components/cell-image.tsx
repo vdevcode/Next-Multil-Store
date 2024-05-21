@@ -1,6 +1,5 @@
 "use client"
 
-import { BillboardColumns } from "./columns"
 import Image from "next/image"
 
 

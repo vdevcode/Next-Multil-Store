@@ -75,20 +75,8 @@ export const DELETE = async (
 ) => {
   try {
     const { userId } = auth();
-    const body = await req.json();
-
     if (!userId) {
       return new NextResponse("Un-authorize", { status: 400 });
-    }
-    const { label, imageUrl } = body;
-    if (!label) {
-      return new NextResponse("Billboard name is missing!!! ", { status: 400 });
-    }
-
-    if (!imageUrl) {
-      return new NextResponse("Image billboards is missing!!!", {
-        status: 400,
-      });
     }
 
     if (!params.storeId) {

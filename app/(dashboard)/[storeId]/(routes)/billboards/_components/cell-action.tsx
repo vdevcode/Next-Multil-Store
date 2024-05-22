@@ -40,7 +40,8 @@ export const CellAction = ({ data }: CellActionProps) => {
       await deleteObject(ref(storage, data.imageUrl)).then(async () => {
         await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       });
-      router.refresh();
+      location.reload()
+    //   router.refresh();
       router.push(`/${params.storeId}/billboards`);
       toast.success("Billboards delete success!!!");
     } catch (error) {

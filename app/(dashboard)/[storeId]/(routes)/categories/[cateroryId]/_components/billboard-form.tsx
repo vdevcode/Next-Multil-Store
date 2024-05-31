@@ -30,7 +30,7 @@ interface CategoryFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
-  billboardLabel: z.string().min(1),
+  billboardId: z.string().min(1),
 });
 
 export const CategoryForm = ({ initialData }: CategoryFormProps) => {
@@ -72,7 +72,6 @@ export const CategoryForm = ({ initialData }: CategoryFormProps) => {
     }
   };
 
-
   return (
     <div>
       <AlertModal
@@ -93,29 +92,10 @@ export const CategoryForm = ({ initialData }: CategoryFormProps) => {
 
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Billboard Image</FormLabel>
-                  <FormControl>
-                    <ImageUpload
-                      value={field.value ? [field.value] : []}
-                      disabled={isLoading}
-                      onChange={(url) => field.onChange(url)}
-                      onRemove={() => field.onChange("")}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
           <div className="grid grid-cols-3">
             <FormField
               control={form.control}
-              name="billboardLabel"
+              name="billboardId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Label</FormLabel>

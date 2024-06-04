@@ -1,7 +1,7 @@
 "use client";
 
 import { Heading } from "@/components/heading";
-import { Categories } from "@/types-db";
+import { BillBoards, Categories } from "@/types-db";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -26,6 +26,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 interface CategoryFormProps {
   initialData: Categories;
+  billboards: BillBoards[];
 }
 
 const formSchema = z.object({
@@ -44,10 +45,12 @@ export const CategoryForm = ({ initialData }: CategoryFormProps) => {
   const router = useRouter();
   const [open, setIsOpen] = useState(false);
 
-  const title = initialData ? "Edit Billboards" : "Create BillBoards";
-  const description = initialData ? "Edit a bill boards" : "Add a bill boards";
-  const toastMessage = initialData ? "Billboard updated" : "Billboard created";
-  const action = initialData ? "Save changes" : "Create Billboards";
+  const title = initialData ? "Edit Categories" : "Create Categories";
+  const description = initialData ? "Edit a categori" : "Add a categori";
+  const toastMessage = initialData
+    ? "Categories updated"
+    : "Categories created";
+  const action = initialData ? "Save changes" : "Create Categories";
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {

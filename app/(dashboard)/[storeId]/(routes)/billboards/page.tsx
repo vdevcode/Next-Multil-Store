@@ -1,4 +1,3 @@
-
 import { collection, doc, getDocs } from "firebase/firestore";
 import { BillBoardClient } from "./_components/client";
 import { db } from "@/lib/firebase";
@@ -9,7 +8,7 @@ import { format } from "date-fns";
 const BillBoardsPage = async ({ params }: { params: { storeId: string } }) => {
   const billboardData = (
     await getDocs(collection(doc(db, "stores", params.storeId), "billboards"))
-  ).docs.map((doc) => doc.data() as BillBoards);
+  ).docs.map((doc) => doc.data()) as BillBoards[];
 
   const formatedBillboards: BillboardColumns[] = billboardData.map((item) => ({
     id: item.id,
